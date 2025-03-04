@@ -49,6 +49,9 @@ class BrazDigital_Forms {
         
         // Registra o Ajax para criar/editar formulários
         add_action('wp_ajax_save_brazdigital_form', array($this->form_handler, 'save_form'));
+
+        // Registra o Ajax para testar as configurações SMTP
+        add_action('wp_ajax_test_smtp_connection', array($this, 'test_smtp_connection'));
         
         // Registra o Ajax para excluir formulários
         add_action('wp_ajax_delete_brazdigital_form', array($this->form_handler, 'delete_form'));
