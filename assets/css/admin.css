@@ -1,0 +1,145 @@
+/* Estilos para a página de administração do BrazDigital Forms */
+
+/* Grade de ícones */
+.icons-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.icon-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.icon-item:hover {
+  border-color: #007cba;
+  background-color: #f0f0f1;
+}
+
+.icon-item svg {
+  margin-bottom: 5px;
+  width: 24px;
+  height: 24px;
+}
+
+.icon-item span {
+  font-size: 11px;
+  text-align: center;
+  color: #555;
+  word-break: break-word;
+}
+
+/* Serviços */
+.service-row {
+  background: #f9f9f9;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+}
+
+.service-row input,
+.service-row textarea {
+  margin-bottom: 8px;
+}
+
+.service-row textarea {
+  font-family: monospace;
+  resize: vertical;
+}
+
+/* Botões */
+.remove-service {
+  color: #a00;
+  border-color: #a00;
+}
+
+.remove-service:hover {
+  color: #fff;
+  background-color: #a00;
+  border-color: #a00;
+}
+
+/* Mensagens e resultados de teste */
+#smtp-test-result {
+  display: inline-block;
+  margin-left: 10px;
+  padding: 5px 0;
+  font-weight: 500;
+}
+
+/* Tabela de listagem de formulários */
+.wp-list-table .column-id {
+  width: 50px;
+}
+
+.wp-list-table .column-shortcode {
+  width: 250px;
+}
+
+.wp-list-table .column-date {
+  width: 150px;
+}
+
+.wp-list-table .column-actions {
+  width: 150px;
+}
+
+/* Área de configurações */
+.form-table th {
+  width: 200px;
+}
+
+/* Visualização de ícones no formulário */
+.services-preview {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.service-preview-item {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: calc(20% - 10px);
+}
+
+.service-preview-item svg {
+  width: 24px;
+  height: 24px;
+  margin-bottom: 5px;
+}
+
+/* Responsividade */
+@media screen and (max-width: 782px) {
+  .icons-grid {
+      grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .service-preview-item {
+      width: calc(33.333% - 10px);
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .icons-grid {
+      grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .service-preview-item {
+      width: calc(50% - 10px);
+  }
+}
