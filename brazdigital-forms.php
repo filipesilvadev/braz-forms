@@ -29,6 +29,7 @@ require_once BRAZDIGITAL_FORMS_PLUGIN_DIR . 'includes/class-shortcode-generator.
 
 // Inicializar o plugin
 function brazdigital_forms_init() {
+    global $wpdb;
     $plugin = new BrazDigital_Forms();
     $plugin->run();
 }

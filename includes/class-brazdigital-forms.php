@@ -184,4 +184,35 @@ class BrazDigital_Forms {
         // Inclui o template do editor de formulário
         include BRAZDIGITAL_FORMS_PLUGIN_DIR . 'templates/form-settings.php';
     }
+
+    /**
+     * Testa as configurações SMTP
+     */
+    public function test_smtp_connection() {
+      // Verifica o nonce de segurança
+      if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'brazdigital_forms_nonce')) {
+          wp_send_json_error('Erro de segurança. Recarregue a página e tente novamente.');
+      }
+      
+      // Verifica permissões
+      if (!current_user_can('manage_options')) {
+          wp_send_json_error('Você não tem permissão para realizar esta ação.');
+      }
+      
+      // Obtém os dados do formulário
+      $host = isset($_POST['host']) ? sanitize_text_field($_POST['host']) : '';
+      $port = isset($_POST['port']) ? intval($_POST['port']) : 0;
+      $user = isset($_POST['user']) ? sanitize_text_field($_POST['user']) : '';
+      $pass = isset($_POST['pass']) ? $_POST['pass'] : '';
+      $secure = isset($_POST['secure']) ? sanitize_text_field($_POST['secure']) : 'tls';
+      
+      // Testa as configurações SMTP
+      $result = $this->mail_sender->test_smtp($host, $port, $user, $pass, $secure);
+      
+      if ($result['success']) {
+          wp_send_json_success(array('message' => $result['message']));
+      } else {
+          wp_send_json_error(array('message' => $result['message']));
+      }
+    }
 }
