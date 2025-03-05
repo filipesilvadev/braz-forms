@@ -31,7 +31,7 @@
       });
       
       // Selecionar um ícone predefinido e inserir no textarea ativo
-      $('.icon-item').on('click', function() {
+      $(document).on('click', '.icon-item', function() {
           var iconSvg = $(this).data('icon');
           var activeTextarea = $('#services-container textarea:focus');
           
