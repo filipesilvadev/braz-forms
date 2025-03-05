@@ -52,7 +52,7 @@ function brazdigital_forms_activate() {
         secondary_color varchar(20) DEFAULT '#ffffff',
         background_color varchar(20) DEFAULT '#ffffff',
         glass_effect tinyint(1) DEFAULT 1,
-        company_name varchar(255) DEFAULT 'Starbuck',
+        company_name varchar(255) DEFAULT 'Business name',
         services longtext,
         recipients text,
         smtp_host varchar(255),
@@ -90,12 +90,12 @@ function brazdigital_forms_activate() {
         $wpdb->insert(
             $table_name,
             [
-                'name' => 'Formulário de Serviços',
+                'name' => 'Standard form',
                 'primary_color' => '#ef3a24',
                 'secondary_color' => '#ffffff',
                 'background_color' => '#ffffff',
                 'glass_effect' => 1,
-                'company_name' => 'Starbuck',
+                'company_name' => 'Business name',
                 'services' => $default_services,
                 'recipients' => get_option('admin_email')
             ]

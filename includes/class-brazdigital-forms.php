@@ -32,9 +32,15 @@ class BrazDigital_Forms {
      * Carrega as dependências necessárias
      */
     private function load_dependencies() {
-        $this->form_handler = new BrazDigital_Form_Handler();
-        $this->shortcode_generator = new BrazDigital_Shortcode_Generator();
-        $this->mail_sender = new BrazDigital_Mail_Sender();
+      // Inclui os arquivos das classes necessárias
+      require_once BRAZDIGITAL_FORMS_PLUGIN_DIR . 'includes/class-form-handler.php';
+      require_once BRAZDIGITAL_FORMS_PLUGIN_DIR . 'includes/class-shortcode-generator.php';
+      require_once BRAZDIGITAL_FORMS_PLUGIN_DIR . 'includes/class-mail-sender.php';
+      
+      // Instancia as classes
+      $this->form_handler = new BrazDigital_Form_Handler();
+      $this->shortcode_generator = new BrazDigital_Shortcode_Generator();
+      $this->mail_sender = new BrazDigital_Mail_Sender();
     }
     
     /**

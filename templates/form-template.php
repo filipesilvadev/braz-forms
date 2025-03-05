@@ -36,7 +36,7 @@ $form_id = 'brazdigital-form-' . $form->id;
     
     <!-- Step 1 -->
     <div class="step active" id="step1">
-        <h2 class="step-title">Selecione um serviço</h2>
+        <h2 class="step-title">Select a Service</h2>
         <div class="service-options">
             <?php foreach ($services as $index => $service) : ?>
                 <div class="service-option" onclick="selectService(this, '<?php echo esc_attr($service['name']); ?>')">
@@ -47,40 +47,40 @@ $form_id = 'brazdigital-form-' . $form->id;
         </div>
         <input type="hidden" id="selected-service" name="service">
         <div class="buttons">
-            <button class="next" onclick="nextStep(1)">Próximo</button>
+            <button class="next" onclick="nextStep(1)">Next</button>
         </div>
     </div>
     
     <!-- Step 2 -->
     <div class="step" id="step2">
-        <h2 class="step-title">Localização</h2>
+        <h2 class="step-title">Location</h2>
         <div class="form-group">
-            <input type="text" id="location" name="location" required placeholder="Endereço">
+            <input type="text" id="location" name="location" required placeholder="Address">
         </div>
         <div class="buttons">
-            <button class="prev" onclick="prevStep(2)">Anterior</button>
-            <button class="next" onclick="nextStep(2)">Próximo</button>
+            <button class="prev" onclick="prevStep(2)">Previous</button>
+            <button class="next" onclick="nextStep(2)">Next</button>
         </div>
     </div>
     
     <!-- Step 3 -->
     <div class="step" id="step3">
-        <h2 class="step-title">Informações de Contato</h2>
+        <h2 class="step-title">Contact Information</h2>
         <div class="form-group">
-            <input type="text" id="name" name="name" required placeholder="Nome">
+            <input type="text" id="name" name="name" required placeholder="Name">
         </div>
         <div class="form-group">
-            <input type="email" id="email" name="email" required placeholder="Seu E-mail">
+            <input type="email" id="email" name="email" required placeholder=" E-mail">
         </div>
         <div class="form-group">
-            <input type="tel" id="phone" name="phone" required placeholder="Telefone">
+            <input type="tel" id="phone" name="phone" required placeholder="Phone">
         </div>
         <div class="form-group">
-            <textarea id="project" name="project" required placeholder="Conte-nos sobre seu projeto" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 4px; font-size: 16px; min-height: 100px;"></textarea>
+            <textarea id="project" name="project" required placeholder="Tell us about your project" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 4px; font-size: 16px; min-height: 100px;"></textarea>
         </div>
         <div class="buttons">
-            <button class="prev" onclick="prevStep(3)">Anterior</button>
-            <button class="next" onclick="submitForm()">Enviar</button>
+            <button class="prev" onclick="prevStep(3)">Previous</button>
+            <button class="next" onclick="submitForm()">Submit</button>
         </div>
     </div>
 </div>
@@ -172,22 +172,22 @@ $form_id = 'brazdigital-form-' . $form->id;
             .done(function(response) {
                 if (response.success) {
                     formElement.querySelector('#step3').innerHTML = `
-                        <h2 class="step-title">Obrigado!</h2>
+                        <h2 class="step-title">Thanks!</h2>
                         <div style="text-align: center; padding: 40px 20px;">
-                            <p style="font-size: 18px; margin-bottom: 20px;">Obrigado pelo seu interesse em nossos serviços!</p>
-                            <p style="font-size: 16px;">A equipe ${companyName} entrará em contato com você em breve.</p>
+                            <p style="font-size: 18px; margin-bottom: 20px;">Thank you for your interest in our services!</p>
+                            <p style="font-size: 16px;">The ${companyName} team will contact you soon.</p>
                         </div>
                     `;
                 } else {
                     alert(response.data || 'Ocorreu um erro ao enviar o formulário. Por favor, tente novamente.');
                     submitButton.disabled = false;
-                    submitButton.textContent = 'Enviar';
+                    submitButton.textContent = 'Submit';
                 }
             })
             .fail(function() {
                 alert('Ocorreu um erro ao enviar o formulário. Por favor, tente novamente.');
                 submitButton.disabled = false;
-                submitButton.textContent = 'Enviar';
+                submitButton.textContent = 'Submit';
             });
     };
 })();

@@ -13,7 +13,7 @@ if (empty($form)) {
         'secondary_color' => '#ffffff',
         'background_color' => '#ffffff',
         'glass_effect' => 1,
-        'company_name' => 'Starbuck',
+        'company_name' => 'Business Name',
         'services' => json_encode(array()),
         'recipients' => get_option('admin_email'),
         'smtp_host' => '',
