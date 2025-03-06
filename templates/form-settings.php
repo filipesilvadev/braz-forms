@@ -135,6 +135,14 @@ $icon_categories = array(
                                         <p class="description">Adiciona um efeito de transparência com blur no fundo do formulário.</p>
                                     </td>
                                 </tr>
+                                <tr>
+                                  <th scope="row"><label for="background_opacity">Opacidade do Fundo</label></th>
+                                    <td>
+                                        <input type="range" id="background_opacity" name="background_opacity" min="0" max="100" value="<?php echo isset($form->background_opacity) ? esc_attr($form->background_opacity) : 40; ?>" class="widefat">
+                                        <span id="opacity-value"><?php echo isset($form->background_opacity) ? esc_attr($form->background_opacity) : 40; ?>%</span>
+                                        <p class="description">Ajuste a opacidade do fundo do formulário (apenas visível com efeito glass ativado).</p>
+                                    </td>
+                                </tr>
                             </table>
                         </div>
                     </div>

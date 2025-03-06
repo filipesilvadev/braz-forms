@@ -31,6 +31,11 @@
       $(document).on('click', '.remove-service', function() {
           $(this).closest('.service-row').remove();
       });
+
+      // Atualizar valor do slider de opacidade em tempo real
+      $('#background_opacity').on('input', function() {
+        $('#opacity-value').text($(this).val() + '%');
+      });
       
       // Copiar shortcode para a área de transferência
       $('.copy-shortcode').on('click', function() {
@@ -189,6 +194,6 @@
       if (window.location.search.indexOf('saved=1') > -1) {
           alert('Formulário salvo com sucesso!');
       }
-  });
+    });
   
 })(jQuery);

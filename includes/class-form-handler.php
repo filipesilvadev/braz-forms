@@ -59,6 +59,10 @@ class BrazDigital_Form_Handler {
         $smtp_user = sanitize_text_field($_POST['smtp_user']);
         $smtp_pass = $_POST['smtp_pass']; // Não sanitizamos senhas para não corromper caracteres especiais
         $smtp_secure = sanitize_text_field($_POST['smtp_secure']);
+
+        $background_opacity = intval($_POST['background_opacity']);
+        if ($background_opacity < 0) $background_opacity = 0;
+        if ($background_opacity > 100) $background_opacity = 100;
         
         // Preparar os dados para o banco de dados
         $data = array(
@@ -73,7 +77,8 @@ class BrazDigital_Form_Handler {
             'smtp_host' => $smtp_host,
             'smtp_port' => $smtp_port,
             'smtp_user' => $smtp_user,
-            'smtp_secure' => $smtp_secure
+            'smtp_secure' => $smtp_secure,
+            'background_opacity' => $background_opacity
         );
         
         // Apenas atualiza a senha se uma nova senha for fornecida

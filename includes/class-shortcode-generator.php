@@ -77,6 +77,7 @@ public function generate_custom_css($form) {
   $secondary_color = $form->secondary_color;
   $background_color = $form->background_color;
   $glass_effect = $form->glass_effect;
+  $background_opacity = isset($form->background_opacity) ? $form->background_opacity : 40;
   
   $css = "
   /* CSS personalizado para o formulário #{$form_id} */
@@ -99,11 +100,11 @@ public function generate_custom_css($form) {
       margin: 0 auto;
       font-family: Arial, sans-serif;
       padding: 20px;
-      background: {$background_color}26;
+      background: " . $this->hex_to_rgba($background_color, $background_opacity / 100) . ";
       border-radius: 8px;
       margin-bottom: 20px;
-      backdrop-filter: blur(15px);
-      border: 1px solid #676766;
+      " . ($glass_effect ? "backdrop-filter: blur(15px);" : "") . "
+      border: 1px solid {$background_color};
   }
   .step {
       display: none;
@@ -186,6 +187,7 @@ public function generate_custom_css($form) {
       align-items: center;
       line-height: 1.25em;
       font-size: 15px;
+      color: {$secondary_color};
   }
   .service-option:hover {
       border-color: {$primary_color};
@@ -198,6 +200,10 @@ public function generate_custom_css($form) {
   .service-option i {
       font-size: 24px;
       margin-bottom: 8px;
+      color: {$secondary_color};
+  }
+  .service-option.selected i {
+      color: white;
   }
   .buttons {
       display: flex;

@@ -46,22 +46,23 @@ function brazdigital_forms_activate() {
     $table_name = $wpdb->prefix . 'brazdigital_forms';
     
     $sql = "CREATE TABLE $table_name (
-        id mediumint(9) NOT NULL AUTO_INCREMENT,
-        name varchar(255) NOT NULL,
-        primary_color varchar(20) DEFAULT '#ef3a24',
-        secondary_color varchar(20) DEFAULT '#ffffff',
-        background_color varchar(20) DEFAULT '#ffffff',
-        glass_effect tinyint(1) DEFAULT 1,
-        company_name varchar(255) DEFAULT 'Business name',
-        services longtext,
-        recipients text,
-        smtp_host varchar(255),
-        smtp_port int(5),
-        smtp_user varchar(255),
-        smtp_pass varchar(255),
-        smtp_secure varchar(10),
-        created_at datetime DEFAULT CURRENT_TIMESTAMP,
-        PRIMARY KEY  (id)
+      id mediumint(9) NOT NULL AUTO_INCREMENT,
+      name varchar(255) NOT NULL,
+      primary_color varchar(20) DEFAULT '#ef3a24',
+      secondary_color varchar(20) DEFAULT '#ffffff',
+      background_color varchar(20) DEFAULT '#ffffff',
+      glass_effect tinyint(1) DEFAULT 1,
+      background_opacity int(3) DEFAULT 40,
+      company_name varchar(255) DEFAULT 'Business name',
+      services longtext,
+      recipients text,
+      smtp_host varchar(255),
+      smtp_port int(5),
+      smtp_user varchar(255),
+      smtp_pass varchar(255),
+      smtp_secure varchar(10),
+      created_at datetime DEFAULT CURRENT_TIMESTAMP,
+      PRIMARY KEY  (id)
     ) $charset_collate;";
     
     require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
