@@ -17,7 +17,9 @@
               <div class="service-row">
                   <p>
                       <input type="text" name="service_name[]" placeholder="Nome do Serviço" class="regular-text" required>
-                      <textarea name="service_icon[]" placeholder="SVG do ícone" class="large-text code" rows="3" required></textarea>
+                      <input type="hidden" name="service_icon[]" class="icon-input" value="fa-solid fa-house">
+                      <span class="icon-preview"><i class="fa-solid fa-house"></i></span>
+                      <button type="button" class="button button-secondary icon-selector-button" onclick="openIconSelector(this)">Selecionar Ícone</button>
                       <button type="button" class="button button-secondary remove-service">Remover</button>
                   </p>
               </div>
@@ -28,19 +30,6 @@
       // Remover um serviço
       $(document).on('click', '.remove-service', function() {
           $(this).closest('.service-row').remove();
-      });
-      
-      // Selecionar um ícone predefinido e inserir no textarea ativo
-      $(document).on('click', '.icon-item', function() {
-          var iconSvg = $(this).data('icon');
-          var activeTextarea = $('#services-container textarea:focus');
-          
-          if (activeTextarea.length === 0) {
-              // Se nenhuma textarea estiver em foco, use a última
-              activeTextarea = $('#services-container textarea').last();
-          }
-          
-          activeTextarea.val(iconSvg);
       });
       
       // Copiar shortcode para a área de transferência

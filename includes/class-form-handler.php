@@ -34,7 +34,7 @@ class BrazDigital_Form_Handler {
                 if (!empty($_POST['service_name'][$i])) {
                     $services[] = array(
                         'name' => sanitize_text_field($_POST['service_name'][$i]),
-                        'icon' => wp_kses($_POST['service_icon'][$i], $this->allowed_html_svg())
+                        'icon' => sanitize_text_field($_POST['service_icon'][$i])
                     );
                 }
             }
@@ -234,57 +234,4 @@ public function handle_submission() {
       }
   }
 }
-    
-    /**
-     * Define os atributos HTML permitidos para SVG
-     */
-    private function allowed_html_svg() {
-        return array(
-            'svg' => array(
-                'width' => array(),
-                'height' => array(),
-                'viewbox' => array(),
-                'fill' => array(),
-                'stroke' => array(),
-                'stroke-width' => array(),
-                'stroke-linecap' => array(),
-                'stroke-linejoin' => array(),
-                'xmlns' => array(),
-            ),
-            'path' => array(
-                'd' => array(),
-                'fill' => array(),
-                'stroke' => array(),
-            ),
-            'circle' => array(
-                'cx' => array(),
-                'cy' => array(),
-                'r' => array(),
-                'fill' => array(),
-            ),
-            'rect' => array(
-                'x' => array(),
-                'y' => array(),
-                'width' => array(),
-                'height' => array(),
-                'fill' => array(),
-            ),
-            'polygon' => array(
-                'points' => array(),
-                'fill' => array(),
-            ),
-            'polyline' => array(
-                'points' => array(),
-                'fill' => array(),
-                'stroke' => array(),
-            ),
-            'line' => array(
-                'x1' => array(),
-                'y1' => array(),
-                'x2' => array(),
-                'y2' => array(),
-                'stroke' => array(),
-            ),
-        );
-    }
 }

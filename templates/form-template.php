@@ -38,12 +38,12 @@ $form_id = 'brazdigital-form-' . $form->id;
     <div class="step active" id="step1">
         <h2 class="step-title">Select a Service</h2>
         <div class="service-options">
-            <?php foreach ($services as $index => $service) : ?>
-                <div class="service-option" onclick="selectService(this, '<?php echo esc_attr($service['name']); ?>')">
-                    <?php echo $service['icon']; ?>
-                    <span><?php echo esc_html($service['name']); ?></span>
-                </div>
-            <?php endforeach; ?>
+          <?php foreach ($services as $index => $service) : ?>
+              <div class="service-option" onclick="selectService(this, '<?php echo esc_attr($service['name']); ?>')">
+                  <i class="<?php echo esc_attr($service['icon']); ?>"></i>
+                  <span><?php echo esc_html($service['name']); ?></span>
+              </div>
+          <?php endforeach; ?>
         </div>
         <input type="hidden" id="selected-service" name="service">
         <div class="buttons">
@@ -167,7 +167,7 @@ $form_id = 'brazdigital-form-' . $form->id;
         submitButton.disabled = true;
         submitButton.textContent = 'Enviando...';
         
-        // Envia os dados via AJAX
+        // Envia os dados via Ajax
         jQuery.post(brazdigital_forms.ajax_url, formData)
             .done(function(response) {
                 if (response.success) {

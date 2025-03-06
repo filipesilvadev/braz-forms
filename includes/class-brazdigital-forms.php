@@ -127,6 +127,9 @@ class BrazDigital_Forms {
             return;
         }
         
+        // Font Awesome
+        wp_enqueue_style('font-awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css', array(), '6.5.1');
+        
         // CSS
         wp_enqueue_style('wp-color-picker');
         wp_enqueue_style('brazdigital-forms-admin', BRAZDIGITAL_FORMS_PLUGIN_URL . 'assets/css/admin.css', array(), BRAZDIGITAL_FORMS_VERSION);
@@ -134,6 +137,7 @@ class BrazDigital_Forms {
         // JavaScript
         wp_enqueue_script('wp-color-picker');
         wp_enqueue_script('brazdigital-forms-admin', BRAZDIGITAL_FORMS_PLUGIN_URL . 'assets/js/admin.js', array('jquery', 'wp-color-picker'), BRAZDIGITAL_FORMS_VERSION, true);
+        wp_enqueue_script('fontawesome-selector', BRAZDIGITAL_FORMS_PLUGIN_URL . 'assets/js/fontawesome-selector.js', array('jquery'), BRAZDIGITAL_FORMS_VERSION, true);
         
         // Localize script para passar variáveis para o JavaScript
         wp_localize_script('brazdigital-forms-admin', 'brazdigital_forms', array(
@@ -147,6 +151,7 @@ class BrazDigital_Forms {
      */
     public function enqueue_public_assets() {
         // O CSS será injetado diretamente pelo shortcode com os estilos personalizados
+        wp_enqueue_style('font-awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css', array(), '6.5.1');
         wp_enqueue_script('jquery');
         wp_enqueue_script('brazdigital-forms-public', BRAZDIGITAL_FORMS_PLUGIN_URL . 'assets/js/form.js', array('jquery'), BRAZDIGITAL_FORMS_VERSION, true);
         

@@ -29,6 +29,38 @@ $services = json_decode($form->services, true);
 if (!is_array($services)) {
     $services = array();
 }
+
+// Lista de categorias de ícones Font Awesome
+$icon_categories = array(
+  'Construction' => array(
+      'fa-solid fa-house', 'fa-solid fa-wrench', 'fa-solid fa-hammer', 'fa-solid fa-paint-roller', 
+      'fa-solid fa-screwdriver', 'fa-solid fa-kitchen-set', 'fa-solid fa-roof', 
+      'fa-solid fa-plug', 'fa-solid fa-faucet', 'fa-solid fa-ruler', 'fa-solid fa-temperature-arrow-up',
+      'fa-solid fa-window-maximize', 'fa-solid fa-couch', 'fa-solid fa-car-side', 'fa-solid fa-bath', 
+      'fa-solid fa-shower', 'fa-solid fa-sink', 'fa-solid fa-solar-panel', 'fa-solid fa-toolbox', 
+      'fa-solid fa-truck', 'fa-solid fa-broom', 'fa-solid fa-stairs', 'fa-solid fa-ladder',
+      'fa-solid fa-trowel', 'fa-solid fa-trowel-bricks', 'fa-solid fa-helmet-safety', 
+      'fa-solid fa-fence', 'fa-solid fa-house-chimney', 'fa-solid fa-paint-brush',
+      'fa-solid fa-screwdriver-wrench', 'fa-solid fa-toilet', 
+      'fa-solid fa-faucet-drip', 'fa-solid fa-fan', 'fa-solid fa-door-open',
+      'fa-solid fa-door-closed', 'fa-solid fa-plug-circle-bolt', 'fa-solid fa-lightbulb'
+  ),
+  'Tree Services' => array(
+      'fa-solid fa-tree', 'fa-solid fa-seedling', 'fa-solid fa-leaf', 'fa-solid fa-plant-wilt',
+      'fa-solid fa-spa', 'fa-solid fa-pagelines', 'fa-solid fa-cloud-sun', 'fa-solid fa-sun',
+      'fa-solid fa-mountain-sun', 'fa-solid fa-water', 'fa-solid fa-tractor', 'fa-solid fa-shovel',
+      'fa-solid fa-scissors', 'fa-solid fa-bugs', 'fa-solid fa-bug', 'fa-solid fa-mosquito',
+      'fa-solid fa-truck-monster', 'fa-solid fa-truck-pickup', 'fa-solid fa-axe', 
+      'fa-solid fa-worm', 'fa-solid fa-location-dot', 'fa-solid fa-map-location-dot',
+      'fa-solid fa-wheat-awn', 'fa-solid fa-spray-can', 'fa-solid fa-map',
+      'fa-solid fa-compass', 'fa-solid fa-person-digging', 'fa-solid fa-briefcase'
+  ),
+  'Brands' => array(
+      'fa-brands fa-facebook', 'fa-brands fa-twitter', 'fa-brands fa-instagram', 'fa-brands fa-youtube',
+      'fa-brands fa-whatsapp', 'fa-brands fa-pinterest', 'fa-brands fa-linkedin', 'fa-brands fa-tiktok',
+      'fa-brands fa-telegram', 'fa-brands fa-slack', 'fa-brands fa-google', 'fa-brands fa-apple'
+  )
+);
 ?>
 <div class="wrap">
     <h1><?php echo ($form->id > 0) ? 'Editar Formulário' : 'Novo Formulário'; ?></h1>
@@ -117,7 +149,9 @@ if (!is_array($services)) {
                                     <div class="service-row">
                                         <p>
                                             <input type="text" name="service_name[]" placeholder="Nome do Serviço" class="regular-text" required>
-                                            <textarea name="service_icon[]" placeholder="SVG do ícone" class="large-text code" rows="3" required></textarea>
+                                            <input type="hidden" name="service_icon[]" class="icon-input" value="fa-solid fa-house">
+                                            <span class="icon-preview"><i class="fa-solid fa-house"></i></span>
+                                            <button type="button" class="button button-secondary icon-selector-button" onclick="openIconSelector(this)">Selecionar Ícone</button>
                                             <button type="button" class="button button-secondary remove-service" style="display:none;">Remover</button>
                                         </p>
                                     </div>
@@ -126,7 +160,9 @@ if (!is_array($services)) {
                                         <div class="service-row">
                                             <p>
                                                 <input type="text" name="service_name[]" value="<?php echo esc_attr($service['name']); ?>" placeholder="Nome do Serviço" class="regular-text" required>
-                                                <textarea name="service_icon[]" placeholder="SVG do ícone" class="large-text code" rows="3" required><?php echo esc_textarea($service['icon']); ?></textarea>
+                                                <input type="hidden" name="service_icon[]" class="icon-input" value="<?php echo esc_attr($service['icon']); ?>">
+                                                <span class="icon-preview"><i class="<?php echo esc_attr($service['icon']); ?>"></i></span>
+                                                <button type="button" class="button button-secondary icon-selector-button" onclick="openIconSelector(this)">Selecionar Ícone</button>
                                                 <button type="button" class="button button-secondary remove-service">Remover</button>
                                             </p>
                                         </div>
@@ -137,19 +173,6 @@ if (!is_array($services)) {
                             <p>
                                 <button type="button" class="button button-secondary" id="add-service">Adicionar Serviço</button>
                             </p>
-                            
-                            <div class="default-icons" style="margin-top: 20px;">
-                                <h3>Ícones Predefinidos</h3>
-                                <p>Clique em um ícone para usá-lo em um serviço:</p>
-                                <div class="icons-grid">
-                                    <?php foreach ($default_icons as $icon_name => $icon_svg) : ?>
-                                        <div class="icon-item" data-icon="<?php echo esc_attr($icon_svg); ?>" title="<?php echo esc_attr($icon_name); ?>">
-                                            <?php echo $icon_svg; ?>
-                                            <span><?php echo esc_html($icon_name); ?></span>
-                                        </div>
-                                    <?php endforeach; ?>
-                                </div>
-                            </div>
                         </div>
                     </div>
                     
@@ -261,4 +284,42 @@ if (!is_array($services)) {
             </div>
         </div>
     </form>
+    
+    <!-- Modal do Seletor de Ícones -->
+    <div id="icon-selector-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Selecione um Ícone</h2>
+                <span class="close-modal">&times;</span>
+            </div>
+            <input type="text" id="icon-search" placeholder="Buscar ícones...">
+            
+            <!-- Abas de categorias -->
+            <div class="icon-tabs">
+                <?php $first_tab = true; ?>
+                <?php foreach ($icon_categories as $category => $icons) : ?>
+                    <button class="icon-tab-btn <?php echo $first_tab ? 'active' : ''; ?>" data-category="<?php echo esc_attr($category); ?>">
+                        <?php echo esc_html($category); ?>
+                    </button>
+                    <?php $first_tab = false; ?>
+                <?php endforeach; ?>
+            </div>
+            
+            <!-- Conteúdo das abas -->
+            <?php $first_tab = true; ?>
+            <?php foreach ($icon_categories as $category => $icons) : ?>
+                <div class="icon-tab-content <?php echo $first_tab ? 'active' : ''; ?>" data-category="<?php echo esc_attr($category); ?>">
+                    <div class="fa-icons-grid">
+                        <?php foreach ($icons as $icon) : ?>
+                            <div class="icon-item" data-icon="<?php echo esc_attr($icon); ?>" data-name="<?php echo esc_attr(str_replace(array('fa-', 'fa-solid ', 'fa-regular ', 'fa-brands '), '', $icon)); ?>">
+                                <i class="<?php echo esc_attr($icon); ?>"></i>
+                                <span><?php echo esc_html(str_replace(array('fa-', 'fa-solid ', 'fa-regular ', 'fa-brands '), '', $icon)); ?></span>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+                <?php $first_tab = false; ?>
+            <?php endforeach; ?>
+        </div>
+    </div>
 </div>

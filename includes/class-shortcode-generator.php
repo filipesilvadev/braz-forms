@@ -80,6 +80,7 @@ public function generate_custom_css($form) {
   
   $css = "
   /* CSS personalizado para o formulário #{$form_id} */
+  @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css');
   h2.step-title {
       display: flex;
       flex-direction: column;
@@ -194,6 +195,10 @@ public function generate_custom_css($form) {
       color: white;
       border-color: {$primary_color};
   }
+  .service-option i {
+      font-size: 24px;
+      margin-bottom: 8px;
+  }
   .buttons {
       display: flex;
       justify-content: space-between;
@@ -225,6 +230,15 @@ public function generate_custom_css($form) {
   }
   button:hover {
       opacity: 0.9;
+  }
+  textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 16px;
+      min-height: 100px;
+      resize: vertical;
   }";
   
   return $css;
